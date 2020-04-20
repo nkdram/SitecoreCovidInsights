@@ -1,0 +1,32 @@
+<section class="sc-applicationContent-main">
+  <article class="p-2">
+    <div class="card mb-3">
+      <div scPageActionBar>
+        <sc-action-bar>
+          <sc-action-bar-right>            
+            <select class="select-css" [(ngModel)]="postData.SiteId">
+              <option  *ngFor="let data of Websites;"  [ngValue]="data.WebSiteId" >{{data.WebSiteName}}</option>
+            </select>
+            <ngx-daterangepicker [(ngModel)]="SelectedData" [options]="options"></ngx-daterangepicker>
+          </sc-action-bar-right>         
+          <sc-action-bar-right>
+            <button scButton="primary" (click)="submitData()">Get-Details</button>
+          </sc-action-bar-right>
+        </sc-action-bar>
+      </div>
+    </div>
+  </article>
+  
+  <article class="p-2">
+    <sc-progress-indicator-panel [show]="show" class="loader">
+      
+    </sc-progress-indicator-panel>
+    <div class="card mb-3">
+      <div class="card-block keywords-charts-container"  style="width: auto;height: 600px;">
+            
+        <div id="keywords" class="keywords-charts" style="width: auto;height: 600px;" ></div>
+      </div>
+    </div>
+  </article>
+ 
+</section>

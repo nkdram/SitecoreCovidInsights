@@ -1,0 +1,71 @@
+<section class="sc-applicationContent-main">
+  <article class="p-2">
+    <div class="card mb-3">
+      <div scPageActionBar>
+        <sc-action-bar>
+          <sc-action-bar-right>            
+            <select class="select-css" [(ngModel)]="postData.SiteId" name="websites" >
+              <option value="" disabled selected>Select Website</option>
+              <option  *ngFor="let data of Websites;"  [ngValue]="data.WebSiteId" >{{data.WebSiteName}}</option>
+            </select>
+            <select class="select-css" [(ngModel)]="postData.DataType" name="datatypes">
+              <option value="" disabled selected>Select Types</option>
+              <option  *ngFor="let datatype of dataTypes;"  [value]="datatype" >{{datatype}}</option>
+            </select>
+            <ngx-daterangepicker [(ngModel)]="SelectedData" [options]="options"></ngx-daterangepicker>
+          </sc-action-bar-right>         
+          <sc-action-bar-right>
+            <button scButton="primary" (click)="submitData()">Get-Details</button>
+          </sc-action-bar-right>
+        </sc-action-bar>
+      </div>
+    </div>
+  </article>
+  <article class="p-2">
+    <div class="card mb-3 stats">
+      <div class="card-block"  *ngIf="statsLoaded">
+        <h2 class="card-title"> {{stats.currentCountry}} <img *ngIf="stats.currentCountryCode!='ZZ'" src="https://www.countryflags.io/{{stats.currentCountryCode}}/shiny/64.png"> 
+        </h2>        
+        <p class="blockquote redBg">COVID Stats : Confirmed [{{stats.covidStats.confirmed}}], Recovered [{{stats.covidStats.recovered}}] </p>
+        <p class="blockquote blueBg">Average Daily visit before COVID : {{stats.averageBeforeCovidVisit}}   </p>
+        <p class="blockquote yellowBg"> Average Daily visits for selected date range :  
+          <sc-icon icon="navigate_up" title="navigate_up" size="medium">{{stats.averageCovidVisit}} []</sc-icon>
+          <sc-icon icon="navigate_down" title="navigate_down" size="medium">{{stats.averageCovidVisit}} []</sc-icon>  
+        </p>
+      </div>
+    </div>
+  </article>
+  <article class="p-2">
+    <sc-progress-indicator-panel [show]="show" class="loader">
+      
+    </sc-progress-indicator-panel>
+    <div class="card mb-3">
+      <div class="card-block">
+        <div echarts [options]="chartOption" [merge]="updateOptions" class="demo-chart"></div>
+        <p class="blockquote-footer"> * Covid Data is based on dataset provided by <a href="https://github.com/CSSEGISandData/COVID-19" target="_blank"> 
+          John Hopkins University</a> </p>
+        <div class="table-wrapper">
+          <table scTable>
+            <thead scSort (sortChange)="onSortChange($event)" sortBehavior="multi">
+              <tr>
+                <th scSortHeader="id">#</th>
+                <th scSortHeader="country">Country</th>
+                <th scSortHeader="dailyvisits">Average daily visits</th>
+                <th> View Details</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr *ngFor="let data of sortedData; trackBy: trackByItemId">
+                <td>{{ data.id }}</td>
+                <td>{{ data.country }}</td>
+                <td>{{ data.dailyvisits }}</td>
+                <td><button scButton="primary" (click)="getCountryDetails(data.countryCode,data.scCountryCode)">View-Details</button></td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
+    </div>
+  </article>
+ 
+</section>

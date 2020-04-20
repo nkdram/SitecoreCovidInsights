@@ -1,0 +1,201 @@
+{
+	"@angular/animations@4.3.6": {
+		"licenses": "MIT",
+		"repository": "https://github.com/angular/angular"
+	},
+	"@angular/cli@1.2.7": {
+		"licenses": "MIT",
+		"repository": "https://github.com/angular/angular-cli"
+	},
+	"@angular/common@4.3.6": {
+		"licenses": "MIT",
+		"repository": "https://github.com/angular/angular"
+	},
+	"@angular/compiler-cli@4.3.6": {
+		"licenses": "MIT",
+		"repository": "https://github.com/angular/angular"
+	},
+	"@angular/compiler@4.3.6": {
+		"licenses": "MIT",
+		"repository": "https://github.com/angular/angular"
+	},
+	"@angular/core@4.3.6": {
+		"licenses": "MIT",
+		"repository": "https://github.com/angular/angular"
+	},
+	"@angular/forms@4.3.6": {
+		"licenses": "MIT",
+		"repository": "https://github.com/angular/angular"
+	},
+	"@angular/http@4.3.6": {
+		"licenses": "MIT",
+		"repository": "https://github.com/angular/angular"
+	},
+	"@angular/language-service@4.3.6": {
+		"licenses": "MIT",
+		"repository": "https://github.com/angular/angular"
+	},
+	"@angular/platform-browser-dynamic@4.3.6": {
+		"licenses": "MIT",
+		"repository": "https://github.com/angular/angular"
+	},
+	"@angular/platform-browser@4.3.6": {
+		"licenses": "MIT",
+		"repository": "https://github.com/angular/angular"
+	},
+	"@angular/router@4.3.6": {
+		"licenses": "MIT",
+		"repository": "https://github.com/angular/angular"
+	},
+	"@speak/ng-bcl@0.7.2": {
+		"licenses": "Custom: https://doc.sitecore.net/speak/speak",
+		"repository": "http://tfs4dk1.dk.sitecore.net/tfs/PD-Products-01/Products/_git/SPEAK3.Components"
+	},
+	"@speak/ng-sc-cli@0.3.3": {
+		"licenses": "UNKNOWN"
+	},
+	"@speak/ng-sc@0.3.3": {
+		"licenses": "Custom: https://doc.sitecore.net/speak/speak",
+		"repository": "http://tfs4dk1.dk.sitecore.net/tfs/PD-Products-01/Products/_git/SPEAK3.Integration"
+	},
+	"@speak/styling@0.8.3": {
+		"licenses": "Custom: https://doc.sitecore.net/speak/speak",
+		"repository": "http://tfs4dk1.dk.sitecore.net/tfs/PD-Products-01/Products/_git/Sitecore.Styling"
+	},
+	"@types/jasmine@2.5.54": {
+		"licenses": "MIT",
+		"repository": "https://github.com/DefinitelyTyped/DefinitelyTyped"
+	},
+	"@types/jasminewd2@2.0.8": {
+		"licenses": "MIT",
+		"repository": "https://github.com/DefinitelyTyped/DefinitelyTyped"
+	},
+	"@types/node@6.0.118": {
+		"licenses": "MIT",
+		"repository": "https://github.com/DefinitelyTyped/DefinitelyTyped"
+	},
+	"angular-signalr-hub@1.6.3": {
+		"licenses": "MIT",
+		"repository": "https://github.com/justmaier/angular-signalr-hub"
+	},
+	"codelyzer@3.0.1": {
+		"licenses": "MIT",
+		"repository": "https://github.com/mgechev/codelyzer"
+	},
+	"core-js@2.6.11": {
+		"licenses": "MIT",
+		"repository": "https://github.com/zloirock/core-js"
+	},
+	"echarts@4.7.0": {
+		"licenses": "Apache-2.0",
+		"repository": "https://github.com/apache/incubator-echarts"
+	},
+	"express-mock-middleware@0.0.6": {
+		"licenses": "MIT",
+		"repository": "https://github.com/LingyuCoder/express-mock-middleware"
+	},
+	"express@4.17.1": {
+		"licenses": "MIT",
+		"repository": "https://github.com/expressjs/express"
+	},
+	"jasmine-core@2.6.4": {
+		"licenses": "MIT",
+		"repository": "https://github.com/jasmine/jasmine"
+	},
+	"jasmine-core@2.99.1": {
+		"licenses": "MIT",
+		"repository": "https://github.com/jasmine/jasmine"
+	},
+	"jasmine-spec-reporter@4.1.1": {
+		"licenses": "Apache-2.0",
+		"repository": "https://github.com/bcaudan/jasmine-spec-reporter"
+	},
+	"jquery@3.4.1": {
+		"licenses": "MIT",
+		"repository": "https://github.com/jquery/jquery"
+	},
+	"karma-chrome-launcher@2.1.1": {
+		"licenses": "MIT",
+		"repository": "https://github.com/karma-runner/karma-chrome-launcher"
+	},
+	"karma-cli@1.0.1": {
+		"licenses": "MIT",
+		"repository": "https://github.com/karma-runner/karma-cli"
+	},
+	"karma-coverage-istanbul-reporter@1.4.3": {
+		"licenses": "MIT",
+		"repository": "https://github.com/mattlewis92/karma-coverage-istanbul-reporter"
+	},
+	"karma-jasmine-html-reporter@0.2.2": {
+		"licenses": "MIT",
+		"repository": "https://github.com/taras42/karma-jasmine-html-reporter"
+	},
+	"karma-jasmine@1.1.2": {
+		"licenses": "MIT",
+		"repository": "https://github.com/karma-runner/karma-jasmine"
+	},
+	"karma-source-map-support@1.4.0": {
+		"licenses": "MIT",
+		"repository": "https://github.com/tschaub/karma-source-map-support"
+	},
+	"karma@1.7.1": {
+		"licenses": "MIT",
+		"repository": "https://github.com/karma-runner/karma"
+	},
+	"leaflet@1.6.0": {
+		"licenses": "BSD-2-Clause",
+		"repository": "https://github.com/Leaflet/Leaflet"
+	},
+	"math-expression-evaluator@1.2.22": {
+		"licenses": "MIT",
+		"repository": "https://github.com/bugwheels94/math-expression-evaluator"
+	},
+	"ngx-daterangepicker@0.5.5": {
+		"licenses": "MIT",
+		"repository": "https://github.com/GNURub/ngx-daterangepicker"
+	},
+	"ngx-echarts@2.1.0": {
+		"licenses": "Custom: https://badge.fury.io/js/ngx-echarts.svg",
+		"repository": "https://github.com/xieziyu/ngx-echarts"
+	},
+	"protractor@5.1.2": {
+		"licenses": "MIT",
+		"repository": "https://github.com/angular/protractor"
+	},
+	"rxjs@5.5.12": {
+		"licenses": "Apache-2.0",
+		"repository": "https://github.com/ReactiveX/RxJS"
+	},
+	"signalr@2.4.1": {
+		"licenses": "Apache-2.0",
+		"repository": "https://github.com/signalr/bower-signalr"
+	},
+	"spdx-expression-parse@1.0.4": {
+		"licenses": "(MIT AND CC-BY-3.0)",
+		"repository": "https://github.com/kemitchell/spdx-expression-parse.js"
+	},
+	"spdx-expression-parse@2.0.2": {
+		"licenses": "MIT",
+		"repository": "https://github.com/jslicense/spdx-expression-parse.js"
+	},
+	"spdx-expression-parse@3.0.0": {
+		"licenses": "MIT",
+		"repository": "https://github.com/jslicense/spdx-expression-parse.js"
+	},
+	"ts-node@3.0.6": {
+		"licenses": "MIT",
+		"repository": "https://github.com/TypeStrong/ts-node"
+	},
+	"tslint@5.3.2": {
+		"licenses": "Apache-2.0",
+		"repository": "https://github.com/palantir/tslint"
+	},
+	"typescript@2.3.4": {
+		"licenses": "Apache-2.0",
+		"repository": "https://github.com/Microsoft/TypeScript"
+	},
+	"zone.js@0.8.29": {
+		"licenses": "MIT",
+		"repository": "https://github.com/angular/zone.js"
+	}
+}
