@@ -4,13 +4,12 @@
       <div scPageActionBar>
         <sc-action-bar>
           <sc-action-bar-right>            
-            <select class="select-css" [(ngModel)]="postData.SiteId" name="websites" >
+            <select class="select-css" [(ngModel)]="postData.SiteId" name="websites" (change)="submitData()">
               <option value="" disabled selected>Select Website</option>
               <option  *ngFor="let data of Websites;"  [ngValue]="data.WebSiteId" >{{data.WebSiteName}}</option>
             </select>
-            <select class="select-css" [(ngModel)]="postData.DataType" name="datatypes">
-              <option value="" disabled selected>Select Types</option>
-              <option  *ngFor="let datatype of dataTypes;"  [value]="datatype" >{{datatype}}</option>
+            <select class="select-css" [(ngModel)]="postData.DataType" name="datatypes" (change)="submitData()">
+              <option  *ngFor="let datatype of dataTypes;"  [ngValue]="datatype.value" >{{datatype.data}}</option>
             </select>
             <ngx-daterangepicker [(ngModel)]="SelectedData" [options]="options"></ngx-daterangepicker>
           </sc-action-bar-right>         
@@ -27,10 +26,12 @@
         <h2 class="card-title"> {{stats.currentCountry}} <img *ngIf="stats.currentCountryCode!='ZZ'" src="https://www.countryflags.io/{{stats.currentCountryCode}}/shiny/64.png"> 
         </h2>        
         <p class="blockquote redBg">COVID Stats : Confirmed [{{stats.covidStats.confirmed}}], Recovered [{{stats.covidStats.recovered}}] </p>
-        <p class="blockquote blueBg">Average Daily visit before COVID : {{stats.averageBeforeCovidVisit}}   </p>
-        <p class="blockquote yellowBg"> Average Daily visits for selected date range :  
-          <sc-icon icon="navigate_up" title="navigate_up" size="medium">{{stats.averageCovidVisit}} []</sc-icon>
-          <sc-icon icon="navigate_down" title="navigate_down" size="medium">{{stats.averageCovidVisit}} []</sc-icon>  
+        <p class="blockquote blueBg">Avg. daily {{postData.DataType}} before COVID : {{stats.averageBeforeCovidVisit}}   </p>
+        <p class="blockquote yellowBg"  *ngIf="stats.visitPercentage > 0"> Avg. daily {{postData.DataType}} for selected dates : {{stats.averageCovidVisit}}  
+          <sc-icon icon="navigate_up" title="navigate_up" size="medium"> {{stats.visitPercentage}}</sc-icon>  {{stats.visitPercentage}} %  
+        </p>
+        <p class="blockquote yellowBg"  *ngIf="stats.visitPercentage < 0"> Avg. daily {{postData.DataType}} for selected date range : {{stats.averageCovidVisit}}  
+          <sc-icon icon="navigate_down" title="stats.visitPercentage" size="medium"> </sc-icon> {{stats.visitPercentage}} %   
         </p>
       </div>
     </div>
@@ -50,7 +51,7 @@
               <tr>
                 <th scSortHeader="id">#</th>
                 <th scSortHeader="country">Country</th>
-                <th scSortHeader="dailyvisits">Average daily visits</th>
+                <th scSortHeader="dailyvisits">Average daily {{postData.DataType}}</th>
                 <th> View Details</th>
               </tr>
             </thead>

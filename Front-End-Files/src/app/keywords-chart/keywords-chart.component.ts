@@ -97,6 +97,18 @@ export class KeywordsChartComponent implements OnInit {
 
     this.show = true;
     this.appService.getKeywordsdbData(body.toString()).subscribe((keywordsData: any) => { 
+      var topSites = this.sortReferringSites(keywordsData);
+      if(topSites.length  > 10) //TakingMaximum10 referringSites
+      {
+        topSites = topSites.slice(0,10);
+      }
+
+      topSites.forEach(site => {
+        if(site.children && site.children.length > 10)
+          site.children = this.sortReferringSites(site.children).slice(0,10);
+      });
+     
+      console.log(topSites);
       let  chartDataOptions = {
         title: {
             text: 'Keywords Search during selected time',
@@ -115,21 +127,23 @@ export class KeywordsChartComponent implements OnInit {
             highlightPolicy: 'ancestor',
             radius: [0, '95%'],
             sort: null,
-            data:  keywordsData,
-            levels: [{
-              r0: '15%',
-              r: '35%',
-              itemStyle: {
-                  borderWidth: 2
-              },
-              label: {
-                  rotate: 'tangential'
-              }
-          }, {
-              r0: '35%',
-              r: '70%',
+            data:  topSites,
+            levels: [{},  {
+              r0: '10%',
+              r: '75%',
               label: {
                   align: 'right'
+              }
+          }, {
+              r0: '75%',
+              r: '72%',
+              label: {
+                  position: 'outside',
+                  padding: 3,
+                  silent: false
+              },
+              itemStyle: {
+                  borderWidth: 3
               }
           }]
         }
@@ -140,6 +154,11 @@ export class KeywordsChartComponent implements OnInit {
       this.show = false;
     });
     
+  }
+
+  private sortReferringSites(keywordsArr){
+   return keywordsArr
+    .sort((c1, c2) => c2.value - c1.value)
   }
 
  

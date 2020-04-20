@@ -16,8 +16,8 @@ export class ChartPageComponent implements OnInit {
   Websites :{};
 
   SelectedData: {
-    from:Date,
-    to:Date
+    from:any,
+    to:any
   };
 
   postData : {
@@ -28,15 +28,12 @@ export class ChartPageComponent implements OnInit {
     DataType:any
   };  
 
-  dataTypes : [ "Visits",
-  "Views",
-  "Bounces",
-  "TimeOnSite",
-  "Value"];
+  dataTypes : any;
 
   stats :{
     currentCountry : any,
     currentCountryCode:any,
+    covidCountryCode:any,
     covidStats:any,
     averageCovidVisit : any,
     averageBeforeCovidVisit:any
@@ -57,6 +54,14 @@ export class ChartPageComponent implements OnInit {
     //Set start and end date during INIT
     
     this.show = false;
+
+    //Data view
+    this.dataTypes = [ 
+      {value :"visits", data:"Visits"},
+      {value :"views", data:"Views"},
+      {value :"bounces", data:"Bounces"},
+ // {value :"timeonsite", data:"TimeOnSite"},
+      {value :"value", data:"Value"}];
 
     //Get Websites
     this.appService.getWebSitesData().subscribe((Websites: any) => { 
@@ -105,7 +110,11 @@ export class ChartPageComponent implements OnInit {
       EndDate : this.datePipe.transform(new Date(), 'yyyy-MM-dd'),
       CountryId :"",
       SiteId : "",
-      DataType :""
+      DataType :"views"
+    };
+    this.SelectedData = {
+      from : this.postData.StartDate,
+      to:this.postData.EndDate
     };
     this.stats ={
       averageBeforeCovidVisit : 0,
@@ -114,7 +123,8 @@ export class ChartPageComponent implements OnInit {
       period : 0,
       currentCountry : 'Unknown Country',
       covidStats : {},
-      visitPercentage: 0
+      visitPercentage: 0,
+      covidCountryCode:''
     }
     this.statsLoaded = false;
     this.GetChartData("","");
@@ -140,7 +150,7 @@ export class ChartPageComponent implements OnInit {
         }
     },
     legend: {
-        data: [ 'Visits','Active-Covid-Cases']
+        data: [ 'Sitecore Data','Active-Covid-Cases']
     },            
     calculable : true,
     xAxis : [
@@ -152,7 +162,7 @@ export class ChartPageComponent implements OnInit {
     yAxis: [
         {
             type: 'value',
-            name: 'Visits',            
+            name: 'Sitecor Data',            
             axisLabel: {
                 formatter: '{value} visits'
             }
@@ -167,7 +177,7 @@ export class ChartPageComponent implements OnInit {
     ],
     series: [
         {
-            name: 'Visits',
+            name: 'Views',
             type: 'line',
         },
         {
@@ -179,11 +189,6 @@ export class ChartPageComponent implements OnInit {
 };
 
   public GetChartData(countryIsoCode, scCountryCode){
-    //Set URL search params
-    // let body = new URLSearchParams();
-    // body.set('StartDate', this.postData.StartDate);
-    // body.set('EndDate', this.postData.EndDate);
-    // body.set('SiteId', this.postData.SiteId);
     var strcountryId = "";
     if(countryIsoCode && countryIsoCode.length > 0)
       strcountryId =  countryIsoCode;
@@ -235,7 +240,18 @@ export class ChartPageComponent implements OnInit {
         } 
 
         this.updateOptions = {
-          series: [{data: xDBValues},{ data: covidValues}]
+          yAxis:[{
+                name: this.postData.DataType,            
+                axisLabel: {
+                    formatter: '{value} ' + this.postData.DataType
+                }            
+            },
+            {            
+                name: 'Active-Covid-Cases'
+            }],
+          series: [{data: xDBValues,name: this.postData.DataType},{ data: covidValues}],
+          legend: { data: [ this.postData.DataType, 'Active-Covid-Cases'] }
+        
         };
    
         this.show = false;
@@ -245,10 +261,6 @@ export class ChartPageComponent implements OnInit {
   }
 
   public GetBeforeAndAfterAverageVisits(countryId){
-    // let body = new URLSearchParams();
-    // body.set('StartDate', this.postData.StartDate);
-    // body.set('EndDate', this.postData.EndDate);
-    // body.set('SiteId', this.postData.SiteId);
     var strcountryId = "";
     if(countryId)
       strcountryId = countryId;
@@ -266,17 +278,14 @@ export class ChartPageComponent implements OnInit {
         var postdateEnd = new Date(this.postData.EndDate); 
         var dateDiff = (postdateEnd.getTime() - postdateStart.getTime())/(1000 * 3600 * 24);
         var startOfCovid = new Date("2020-01-22");//Start of Covid Data
-        // body.set('EndDate', this.datePipe.transform(startOfCovid, 'yyyy-MM-dd'));//start of Covid will be the end date
-        // body.set('StartDate', this.datePipe.transform(startOfCovid.setDate(startOfCovid.getDate()-dateDiff), 'yyyy-MM-dd'));//Date subtracted
         this.stats.period = dateDiff;
         bodyStr = this.GetBodyString(this.datePipe.transform(startOfCovid.setDate(startOfCovid.getDate()-dateDiff), 'yyyy-MM-dd')
         ,this.datePipe.transform(startOfCovid, 'yyyy-MM-dd'),this.postData.SiteId, strcountryId,this.postData.DataType);
         this.appService.getAvgXdbData(bodyStr).subscribe((averageVisits: any) => { 
           averageVisits.Results.forEach(avgData=> {
             this.stats.averageBeforeCovidVisit = avgData.VisitCount;
-            this.statsLoaded = true;
-            console.log((((this.stats.averageCovidVisit - this.stats.averageBeforeCovidVisit)/this.stats.averageBeforeCovidVisit) * 100));
-            this.stats.visitPercentage =  (((this.stats.averageCovidVisit - this.stats.averageBeforeCovidVisit)/this.stats.averageBeforeCovidVisit) * 100)
+            this.statsLoaded = true;            
+            this.stats.visitPercentage =  (((this.stats.averageCovidVisit - this.stats.averageBeforeCovidVisit)/this.stats.averageBeforeCovidVisit) * 100).toFixed(2)
           });
           
         });
@@ -286,11 +295,6 @@ export class ChartPageComponent implements OnInit {
   }
   
   public GetAverageVisit(){
-    // let body = new URLSearchParams();
-    // body.set('StartDate', this.postData.StartDate);
-    // body.set('EndDate', this.postData.EndDate);
-    // body.set('SiteId', this.postData.SiteId);
-    // body.set('CountryId', this.postData.CountryId);
     //Form-Body-String
     var bodyStr = this.GetBodyString(this.postData.StartDate,this.postData.EndDate,this.postData.SiteId,this.postData.CountryId,this.postData.DataType);
     this.sortedData = [];
@@ -315,6 +319,8 @@ export class ChartPageComponent implements OnInit {
       this.postData.StartDate = this.SelectedData.from;
       this.postData.EndDate = this.SelectedData.to;
     }
+    this.stats.covidCountryCode = countryIsoCode;
+    this.stats.currentCountryCode = scCountryCode;
     this.GetChartData(countryIsoCode,scCountryCode);
   }
   
@@ -365,7 +371,8 @@ export class ChartPageComponent implements OnInit {
     }
 
     //load Chart Data
-    this.GetChartData("","");
+    this.GetChartData(this.stats.covidCountryCode,this.stats.currentCountryCode);
+    this.GetAverageVisit();
   }
 
 }
