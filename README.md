@@ -1,0 +1,2 @@
+# SitecoreCovidInsights
+Sitecore Covid Insights
