@@ -97,10 +97,10 @@ namespace RD.COVID.Traffic.Core.XConnect
         /// </summary>
         /// <param name="covidRequestData"></param>
         /// <returns></returns>
-        public IEnumerable<XdbKeywords> GetSearchedKeywords(CovidTrafficRequestData covidRequestData)
+        public XdbKeywordsReponse GetSearchedKeywords(CovidTrafficRequestData covidRequestData)
         {
-            DataTable dt; string advQuery = ""; var keywords = new List<XdbKeywords>();
-
+            DataTable dt; string advQuery = ""; var keywords = new List<XdbKeywords>();var topKeywords = new List<XdbKeywords>();
+            XdbKeywordsReponse response = new XdbKeywordsReponse();
 
             if (!string.IsNullOrEmpty(covidRequestData.SiteId))
                 advQuery += $" and RS.SiteNameId = '{covidRequestData.SiteId}' ";
@@ -111,7 +111,7 @@ namespace RD.COVID.Traffic.Core.XConnect
                 dt = ExecuteXbQuery(string.Format(_getReferringUrls, covidRequestData.StartDate.ToString("yyyy-MM-dd"), covidRequestData.EndDate.ToString("yyyy-MM-dd"), ""));
 
             if (dt == null || dt?.Rows.Count == 0)
-                return keywords;
+                return response;
 
             var listUrls = dt.AsEnumerable().Select(x => x.Field<string>("URLS")).ToList();
             foreach (var url in listUrls)
@@ -128,12 +128,15 @@ namespace RD.COVID.Traffic.Core.XConnect
                         var searchKeyword = ParsedQuery(queryDictionary);
                         if (!string.IsNullOrEmpty(searchKeyword))
                         {
-                            XdbKeywords keywordDomain, searchword;
+                            XdbKeywords keywordDomain, searchword, topKeyword;
                             keywords = AddToList(keywords, new XdbKeywords() { name = domainName, value = 1 }, out keywordDomain);
                             //GetKeyword(url);
                             keywordDomain.children = AddToList(keywordDomain.children?.ToList(), new XdbKeywords() { name = searchKeyword, value = 1 }, out searchword);
                             //keywords = SetValue<XdbKeywords>(keywords.Where(x => x.name == domainName), x => { x.children = keywordDomain.children; }).ToList();
                             keywords.Where(x => x.name == domainName).ToList().ForEach(s => s.children = keywordDomain.children);
+
+                            //Top Keywords
+                            topKeywords = AddToList(topKeywords, new XdbKeywords() { name = searchKeyword, value = 1 }, out topKeyword);
                         }
 
                     }
@@ -144,8 +147,10 @@ namespace RD.COVID.Traffic.Core.XConnect
                     //log exception
                 }
             }
+            response.Keywords = keywords;
+            response.TopKeywords = topKeywords.OrderByDescending(x=>x.value).Take(1000); //Take top 1000 search key words
 
-            return keywords;
+            return response;
 
         }
 

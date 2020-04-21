@@ -38,7 +38,7 @@ namespace RD.COVID.Traffic.Core.XConnect
         /// </summary>
         /// <param name="covidRequestData"></param>
         /// <returns></returns>
-        IEnumerable<XdbKeywords> GetSearchedKeywords(CovidTrafficRequestData covidRequestData);
+        XdbKeywordsReponse GetSearchedKeywords(CovidTrafficRequestData covidRequestData);
         
     }
 }

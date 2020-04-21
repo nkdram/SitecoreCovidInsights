@@ -54,7 +54,6 @@ export class ChartPageComponent implements OnInit {
     //Set start and end date during INIT
     
     this.show = false;
-
     //Data view
     this.dataTypes = [ 
       {value :"visits", data:"Visits"},
@@ -280,7 +279,7 @@ export class ChartPageComponent implements OnInit {
         var startOfCovid = new Date("2020-01-22");//Start of Covid Data
         this.stats.period = dateDiff;
         bodyStr = this.GetBodyString(this.datePipe.transform(startOfCovid.setDate(startOfCovid.getDate()-dateDiff), 'yyyy-MM-dd')
-        ,this.datePipe.transform(startOfCovid, 'yyyy-MM-dd'),this.postData.SiteId, strcountryId,this.postData.DataType);
+        ,this.datePipe.transform(new Date("2020-01-22"), 'yyyy-MM-dd'),this.postData.SiteId, strcountryId,this.postData.DataType);
         this.appService.getAvgXdbData(bodyStr).subscribe((averageVisits: any) => { 
           averageVisits.Results.forEach(avgData=> {
             this.stats.averageBeforeCovidVisit = avgData.VisitCount;

@@ -168,6 +168,7 @@
     <Compile Include="Models\GlobalCovidData.cs" />
     <Compile Include="Models\XDbDataModel.cs" />
     <Compile Include="Models\XdbKeywords.cs" />
+    <Compile Include="Models\XdbKeywordsReponse.cs" />
     <Compile Include="Models\XdbWebSiteData.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="XDB\IXDbDataService.cs" />

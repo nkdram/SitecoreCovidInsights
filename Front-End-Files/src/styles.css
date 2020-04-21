@@ -133,3 +133,12 @@ div.stats{
 .select-css:disabled:hover, .select-css[aria-disabled=true] {
 	border-color: #aaa;
 }
+
+.keyword-charts-area{
+	width: 50%;
+	float: left;
+}
+
+.keyword-charts-area td{
+	max-width: 200px;
+}
