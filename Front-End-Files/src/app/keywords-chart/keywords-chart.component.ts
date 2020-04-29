@@ -166,7 +166,7 @@ export class KeywordsChartComponent implements OnInit {
   chartDataOptions = {
     title: {
         text: 'Top Searches during selected time',
-        subtext: 'Source: ',
+        subtext: '',
         textStyle: {
             fontSize: 14,
             align: 'center'
@@ -193,8 +193,8 @@ export class KeywordsChartComponent implements OnInit {
           r: '72%',
           label: {
               position: 'outside',
-              padding: 3,
-              silent: false
+              padding: 1,
+              silent: true
           },
           itemStyle: {
               borderWidth: 3
